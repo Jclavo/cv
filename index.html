@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lorem Ipsum — Curriculum Vitae</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EFEBE2;
+    --surface: #F8F6F0;
+    --ink: #1E2420;
+    --ink-soft: #5B5F58;
+    --ink-faint: #8B8E85;
+    --accent: #2F5D4F;
+    --accent-2: #A15C2E;
+    --line: #D6D1C2;
+    --line-soft: #E2DDCF;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171B17;
+      --surface: #1E231E;
+      --ink: #EDEAE1;
+      --ink-soft: #ABA99E;
+      --ink-faint: #75766D;
+      --accent: #7FBBA4;
+      --accent-2: #D69A67;
+      --line: #33392F;
+      --line-soft: #282D24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171B17;
+    --surface: #1E231E;
+    --ink: #EDEAE1;
+    --ink-soft: #ABA99E;
+    --ink-faint: #75766D;
+    --accent: #7FBBA4;
+    --accent-2: #D69A67;
+    --line: #33392F;
+    --line-soft: #282D24;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: calc(24px + env(safe-area-inset-top, 0px)); }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sidebar ---------- */
+  aside {
+    padding: 56px 32px 40px;
+    border-right: 1px solid var(--line);
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    align-self: start;
+    height: fit-content;
+  }
+
+  .id-mark {
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+
+  aside h1 {
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 1.25;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .role {
+    font-size: 14.5px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+
+  .lede {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 30px;
+    max-width: 34ch;
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 0 0 34px;
+    padding: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+  }
+  .contact-list li {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  .contact-list li:first-child { border-top: 1px solid var(--line-soft); }
+  .contact-list span.k { color: var(--ink-faint); min-width: 44px; flex-shrink: 0; }
+  .contact-list a { color: var(--ink); }
+
+  nav.toc { font-size: 13.5px; }
+  nav.toc .label {
+    color: var(--ink-faint);
+    font-size: 11px;
+    margin-bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+  }
+  nav.toc li { counter-increment: toc; margin-bottom: 3px; }
+  nav.toc a {
+    color: var(--ink-soft);
+    display: flex;
+    gap: 10px;
+    padding: 4px 0;
+  }
+  nav.toc a:hover { color: var(--ink); text-decoration: none; }
+  nav.toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+
+  .print-btn {
+    margin-top: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 9px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Main ---------- */
+  main { padding: 56px 40px 100px; min-width: 0; }
+
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  section:last-child { margin-bottom: 0; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec-head h2 {
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 0;
+  }
+  .sec-head .count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+  }
+
+  .about-text { max-width: 62ch; color: var(--ink-soft); font-size: 15px; }
+  .about-text p { margin: 0 0 14px; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  /* Experience timeline */
+  .entry {
+    display: grid;
+    grid-template-columns: 108px 1fr;
+    gap: 22px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+  }
+  .entry:first-child { padding-top: 0; }
+  .entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .entry .when {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 3px;
+  }
+
+  .entry .role-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    margin: 0 0 3px;
+  }
+  .entry .org {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .entry .org span { color: var(--ink-faint); font-weight: 400; }
+
+  .entry ul {
+    margin: 0 0 12px;
+    padding-left: 18px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+  .entry ul li { margin-bottom: 5px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+  /* Skills */
+  .skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+  .skill-group .g-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  .skill-group .tags { gap: 8px; }
+  .skill-group .tag { background: var(--surface); }
+
+  /* Projects */
+  .projects-grid { display: grid; gap: 18px; }
+  .proj {
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+  }
+  .proj .p-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .proj h3 { font-size: 15.5px; font-weight: 600; margin: 0; }
+  .proj .p-link { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; white-space: nowrap; }
+  .proj p { margin: 0 0 10px; font-size: 14px; color: var(--ink-soft); }
+
+  /* Certifications */
+  .cert-list { list-style: none; margin: 0; padding: 0; }
+  .cert-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14.5px;
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-name { font-weight: 500; }
+  .cert-org { color: var(--ink-soft); font-size: 13.5px; }
+  .cert-date { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-faint); white-space: nowrap; padding-top: 1px; }
+
+  footer.contact-block {
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: baseline;
+  }
+  footer.contact-block p { margin: 0; color: var(--ink-soft); font-size: 13.5px; max-width: 46ch; }
+  footer.contact-block a { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 820px) {
+    .wrap { grid-template-columns: 1fr; }
+    aside {
+      position: relative;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 40px 24px 28px;
+    }
+    nav.toc { display: none; }
+    main { padding: 40px 24px 80px; }
+    .entry { grid-template-columns: 1fr; gap: 6px; }
+    .entry .when { padding-top: 0; }
+    .skill-groups { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .cert-list li { flex-direction: column; gap: 2px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  @media print {
+    aside { position: static; border-right: none; }
+    .wrap { grid-template-columns: 1fr; display: block; }
+    .print-btn, nav.toc { display: none; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <aside>
+    <div class="id-mark">LI</div>
+    <h1>Lorem Ipsum</h1>
+    <div class="role">Senior Backend Engineer</div>
+    <p class="lede">Dolor sit amet, consectetur adipiscing elit — building reliable systems, sed do eiusmod tempor incididunt.</p>
+
+    <ul class="contact-list">
+      <li><span class="k">mail</span><a href="mailto:lorem.ipsum@example.com">lorem.ipsum@example.com</a></li>
+      <li><span class="k">tel</span><span>+00 000 000 0000</span></li>
+      <li><span class="k">loc</span><span>Dolor City, Sit Country</span></li>
+      <li><span class="k">web</span><a href="#">loremipsum.dev</a></li>
+      <li><span class="k">git</span><a href="#">github.com/loremipsum</a></li>
+      <li><span class="k">in</span><a href="#">linkedin.com/in/loremipsum</a></li>
+    </ul>
+
+    <nav class="toc">
+      <div class="label">SECTIONS</div>
+      <ol>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+      </ol>
+    </nav>
+
+    <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+  </aside>
+
+  <main>
+
+    <section id="about">
+      <div class="sec-head"><h2>About</h2></div>
+      <div class="about-text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec magna at libero tincidunt facilisis. Nulla facilisi. Integer euismod, nisl eget consectetur sagittis, nisi nunc ullamcorper nunc, eget aliquam nunc nunc eget nunc.</p>
+        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; suspendisse potenti. Curabitur non lorem non lacus feugiat porttitor ac at lorem, adapting quickly to sed euismod tempor.</p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head"><h2>Experience</h2><span class="count">04</span></div>
+
+      <div class="entry">
+        <div class="when">2024 — Present</div>
+        <div>
+          <p class="role-title">Senior Lorem Engineer</p>
+          <p class="org">Consectetur Adipiscing Ltd. <span>· Dolor City</span></p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</li>
+            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</li>
+            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</li>
+          </ul>
+          <div class="tags"><span class="tag">Lorem</span><span class="tag">Ipsum API</span><span class="tag">Dolor DB</span><span class="tag">CI/CD</span></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2021 — 2024</div>
+        <div>
+          <p class="role-title">Backend Engineer</p>
+          <p class="org">Sed Do Eiusmod Inc. <span>· Sit City</span></p>
+          <ul>
+            <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</li>
+            <li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</li>
+            <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</li>
+          </ul>
+          <div class="tags"><span class="tag">Lorem Framework</span><span class="tag">REST</span><span class="tag">Ipsum Queue</span></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2019 — 2021</div>
+        <div>
+          <p class="role-title">Junior Developer</p>
+          <p class="org">Tempor Incididunt Co. <span>· Amet City</span></p>
+          <ul>
+            <li>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur.</li>
+            <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</li>
+          </ul>
+          <div class="tags"><span class="tag">Lorem</span><span class="tag">SQL</span><span class="tag">Git</span></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2018 — 2019</div>
+        <div>
+          <p class="role-title">Intern, Lorem Systems</p>
+          <p class="org">Ut Labore Et Dolore GmbH <span>· Magna City</span></p>
+          <ul>
+            <li>Et harum quidem rerum facilis est et expedita distinctio nam libero tempore.</li>
+          </ul>
+          <div class="tags"><span class="tag">Lorem</span><span class="tag">Testing</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-head"><h2>Education</h2><span class="count">02</span></div>
+
+      <div class="entry">
+        <div class="when">2015 — 2019</div>
+        <div>
+          <p class="role-title">B.Sc. in Lorem Computer Science</p>
+          <p class="org">Universitas Ipsum <span>· Dolor City</span></p>
+          <ul>
+            <li>Consectetur adipiscing elit, thesis on sed do eiusmod distributed tempor systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2013 — 2015</div>
+        <div>
+          <p class="role-title">Technical Diploma, Sit Amet Systems</p>
+          <p class="org">Instituto Consectetur <span>· Amet City</span></p>
+          <ul>
+            <li>Ut enim ad minim veniam network and systems fundamentals.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sec-head"><h2>Skills</h2></div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <div class="g-label">LANGUAGES &amp; FRAMEWORKS</div>
+          <div class="tags">
+            <span class="tag">Lorem</span><span class="tag">Ipsum.js</span><span class="tag">Dolor Framework</span>
+            <span class="tag">Sit</span><span class="tag">Amet Lang</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="g-label">DATA &amp; INFRASTRUCTURE</div>
+          <div class="tags">
+            <span class="tag">Consectetur DB</span><span class="tag">Adipiscing Cache</span><span class="tag">Elit Queue</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="g-label">TOOLING</div>
+          <div class="tags">
+            <span class="tag">Sed CI</span><span class="tag">Eiusmod Test</span><span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="g-label">PRACTICES</div>
+          <div class="tags">
+            <span class="tag">Tempor Design</span><span class="tag">Code Review</span><span class="tag">Mentoring</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="sec-head"><h2>Projects</h2></div>
+      <div class="projects-grid">
+        <div class="proj">
+          <div class="p-head"><h3>Lorem Ipsum Toolkit</h3><span class="p-link"><a href="#">repo →</a></span></div>
+          <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua open-source tool.</p>
+          <div class="tags"><span class="tag">Lorem</span><span class="tag">Open Source</span></div>
+        </div>
+        <div class="proj">
+          <div class="p-head"><h3>Dolor Sit API</h3><span class="p-link"><a href="#">live →</a></span></div>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+          <div class="tags"><span class="tag">API</span><span class="tag">Docs</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="sec-head"><h2>Certifications</h2></div>
+      <ul class="cert-list">
+        <li>
+          <div><div class="cert-name">Lorem Ipsum Certified Professional</div><div class="cert-org">Consectetur Institute</div></div>
+          <div class="cert-date">2023</div>
+        </li>
+        <li>
+          <div><div class="cert-name">Dolor Sit Amet Practitioner</div><div class="cert-org">Adipiscing Foundation</div></div>
+          <div class="cert-date">2021</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="contact-block">
+      <p>Lorem ipsum dolor sit amet — open to consectetur adipiscing opportunities and collaboration.</p>
+      <a href="mailto:lorem.ipsum@example.com">lorem.ipsum@example.com →</a>
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
