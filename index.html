@@ -6,46 +6,47 @@
 <title>Lorem Ipsum — Curriculum Vitae</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #EFEBE2;
-    --surface: #F8F6F0;
-    --ink: #1E2420;
-    --ink-soft: #5B5F58;
-    --ink-faint: #8B8E85;
-    --accent: #2F5D4F;
-    --accent-2: #A15C2E;
-    --line: #D6D1C2;
-    --line-soft: #E2DDCF;
+    --bg: #0A0D13;
+    --bg-2: #0E1219;
+    --surface: #121826;
+    --ink: #E7ECF4;
+    --ink-soft: #8D98AC;
+    --ink-faint: #4C566B;
+    --accent: #34F1E4;
+    --accent-glow: rgba(52, 241, 228, 0.35);
+    --accent-2: #B57BFF;
+    --accent-2-glow: rgba(181, 123, 255, 0.3);
+    --line: #1F2736;
+    --line-soft: #171E2A;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #171B17;
-      --surface: #1E231E;
-      --ink: #EDEAE1;
-      --ink-soft: #ABA99E;
-      --ink-faint: #75766D;
-      --accent: #7FBBA4;
-      --accent-2: #D69A67;
-      --line: #33392F;
-      --line-soft: #282D24;
-    }
+  :root[data-theme="light"] {
+    --bg: #EEF1F6;
+    --bg-2: #E7EBF2;
+    --surface: #FFFFFF;
+    --ink: #10141C;
+    --ink-soft: #4A5568;
+    --ink-faint: #8A93A6;
+    --accent: #0891A3;
+    --accent-glow: rgba(8, 145, 163, 0.18);
+    --accent-2: #7C3AED;
+    --accent-2-glow: rgba(124, 58, 237, 0.15);
+    --line: #D3D9E3;
+    --line-soft: #E1E5EC;
   }
-  :root[data-theme="dark"] {
-    --bg: #171B17;
-    --surface: #1E231E;
-    --ink: #EDEAE1;
-    --ink-soft: #ABA99E;
-    --ink-faint: #75766D;
-    --accent: #7FBBA4;
-    --accent-2: #D69A67;
-    --line: #33392F;
-    --line-soft: #282D24;
+
+  body {
+    background-image:
+      linear-gradient(var(--bg-2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-2) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-attachment: fixed;
   }
 
   html { scroll-behavior: smooth; scroll-padding-top: calc(24px + env(safe-area-inset-top, 0px)); }
@@ -88,20 +89,22 @@
   .id-mark {
     width: 52px;
     height: 52px;
-    border: 1.5px solid var(--ink);
+    border: 1.5px solid var(--accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'IBM Plex Serif', serif;
-    font-size: 20px;
-    font-style: italic;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--accent);
     margin-bottom: 28px;
+    box-shadow: 0 0 22px var(--accent-glow), inset 0 0 14px var(--accent-glow);
   }
 
   aside h1 {
-    font-family: 'IBM Plex Serif', serif;
-    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
     font-size: 27px;
     line-height: 1.25;
     margin: 0 0 6px;
@@ -110,7 +113,7 @@
 
   .role {
     font-size: 14.5px;
-    color: var(--accent);
+    color: var(--accent-2);
     font-weight: 500;
     margin-bottom: 22px;
   }
@@ -179,7 +182,7 @@
     border-radius: 3px;
     cursor: pointer;
   }
-  .print-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .print-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
 
   /* ---------- Main ---------- */
   main { padding: 56px 40px 100px; min-width: 0; }
@@ -194,12 +197,24 @@
     margin-bottom: 22px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .sec-head::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 64px;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
   }
   .sec-head h2 {
-    font-family: 'IBM Plex Serif', serif;
-    font-weight: 500;
-    font-size: 21px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
     margin: 0;
+    letter-spacing: -0.01em;
   }
   .sec-head .count {
     font-family: 'IBM Plex Mono', monospace;
@@ -237,7 +252,7 @@
   }
   .entry .org {
     font-size: 14px;
-    color: var(--accent);
+    color: var(--accent-2);
     font-weight: 500;
     margin-bottom: 10px;
   }
@@ -259,6 +274,12 @@
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: 3px 8px;
+    transition: border-color .15s, color .15s, box-shadow .15s;
+  }
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
   }
 
   /* Skills */
