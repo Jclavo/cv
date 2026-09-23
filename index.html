@@ -185,6 +185,36 @@
     box-shadow: 0 0 10px var(--accent-glow);
   }
 
+  .lang-switch {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 50;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .lang-switch button {
+    font-size: 16px;
+    line-height: 1;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 6px 9px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, opacity .15s;
+    opacity: 0.55;
+  }
+  .lang-switch button:hover { opacity: 0.85; }
+  .lang-switch button.active {
+    opacity: 1;
+    border-color: var(--accent-2);
+    box-shadow: 0 0 10px var(--accent-2-glow);
+  }
+
   .wrap {
     max-width: 1080px;
     margin: 0 auto;
@@ -450,6 +480,7 @@
     .entry .when { padding-top: 0; }
     .skill-groups { grid-template-columns: 1fr; }
     .style-switch { top: auto; bottom: 16px; right: 16px; }
+    .lang-switch { top: auto; bottom: 16px; left: 16px; }
   }
 
   @media (max-width: 480px) {
@@ -463,17 +494,24 @@
   @media print {
     aside { position: static; border-right: none; }
     .wrap { grid-template-columns: 1fr; display: block; }
-    .print-btn, nav.toc, .style-switch, body::before { display: none; }
+    .print-btn, nav.toc, .style-switch, .lang-switch, body::before { display: none; }
     body { background: #fff; }
   }
 </style>
 </head>
 <body>
 
+<div class="lang-switch" role="group" aria-label="Language">
+  <button type="button" data-lang="en" aria-label="English">🇬🇧</button>
+  <button type="button" data-lang="es" aria-label="Español">🇪🇸</button>
+  <button type="button" data-lang="pt" aria-label="Português">🇵🇹</button>
+  <button type="button" data-lang="fr" aria-label="Français">🇫🇷</button>
+</div>
+
 <div class="style-switch" role="group" aria-label="Page style">
-  <button type="button" data-style="document">Document</button>
-  <button type="button" data-style="futurist">Futurist</button>
-  <button type="button" data-style="cyberpunk">Cyberpunk</button>
+  <button type="button" data-style="document" data-i18n="style_document">Document</button>
+  <button type="button" data-style="futurist" data-i18n="style_futurist">Futurist</button>
+  <button type="button" data-style="cyberpunk" data-i18n="style_cyberpunk">Cyberpunk</button>
 </div>
 
 <div class="wrap">
@@ -493,24 +531,24 @@
     </ul>
 
     <nav class="toc">
-      <div class="label">SECTIONS</div>
+      <div class="label" data-i18n="toc_label">SECTIONS</div>
       <ol>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+        <li><a href="#education" data-i18n="nav_education">Education</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+        <li><a href="#certifications" data-i18n="nav_certifications">Certifications</a></li>
       </ol>
     </nav>
 
-    <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+    <button class="print-btn" onclick="window.print()" data-i18n="print_btn">Download / Print PDF</button>
   </aside>
 
   <main>
 
     <section id="about">
-      <div class="sec-head"><h2>About</h2></div>
+      <div class="sec-head"><h2 data-i18n="nav_about">About</h2></div>
       <div class="about-text">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec magna at libero tincidunt facilisis. Nulla facilisi. Integer euismod, nisl eget consectetur sagittis, nisi nunc ullamcorper nunc, eget aliquam nunc nunc eget nunc.</p>
         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; suspendisse potenti. Curabitur non lorem non lacus feugiat porttitor ac at lorem, adapting quickly to sed euismod tempor.</p>
@@ -518,10 +556,10 @@
     </section>
 
     <section id="experience">
-      <div class="sec-head"><h2>Experience</h2><span class="count">04</span></div>
+      <div class="sec-head"><h2 data-i18n="nav_experience">Experience</h2><span class="count">04</span></div>
 
       <div class="entry">
-        <div class="when">2024 — Present</div>
+        <div class="when">2024 — <span data-i18n="present">Present</span></div>
         <div>
           <p class="role-title">Senior Lorem Engineer</p>
           <p class="org">Consectetur Adipiscing Ltd. <span>· Dolor City</span></p>
@@ -575,7 +613,7 @@
     </section>
 
     <section id="education">
-      <div class="sec-head"><h2>Education</h2><span class="count">02</span></div>
+      <div class="sec-head"><h2 data-i18n="nav_education">Education</h2><span class="count">02</span></div>
 
       <div class="entry">
         <div class="when">2015 — 2019</div>
@@ -601,30 +639,30 @@
     </section>
 
     <section id="skills">
-      <div class="sec-head"><h2>Skills</h2></div>
+      <div class="sec-head"><h2 data-i18n="nav_skills">Skills</h2></div>
       <div class="skill-groups">
         <div class="skill-group">
-          <div class="g-label">LANGUAGES &amp; FRAMEWORKS</div>
+          <div class="g-label" data-i18n="skill_lang_fw">LANGUAGES &amp; FRAMEWORKS</div>
           <div class="tags">
             <span class="tag">Lorem</span><span class="tag">Ipsum.js</span><span class="tag">Dolor Framework</span>
             <span class="tag">Sit</span><span class="tag">Amet Lang</span>
           </div>
         </div>
         <div class="skill-group">
-          <div class="g-label">DATA &amp; INFRASTRUCTURE</div>
+          <div class="g-label" data-i18n="skill_data_infra">DATA &amp; INFRASTRUCTURE</div>
           <div class="tags">
             <span class="tag">Consectetur DB</span><span class="tag">Adipiscing Cache</span><span class="tag">Elit Queue</span>
             <span class="tag">Docker</span>
           </div>
         </div>
         <div class="skill-group">
-          <div class="g-label">TOOLING</div>
+          <div class="g-label" data-i18n="skill_tooling">TOOLING</div>
           <div class="tags">
             <span class="tag">Sed CI</span><span class="tag">Eiusmod Test</span><span class="tag">Git</span>
           </div>
         </div>
         <div class="skill-group">
-          <div class="g-label">PRACTICES</div>
+          <div class="g-label" data-i18n="skill_practices">PRACTICES</div>
           <div class="tags">
             <span class="tag">Tempor Design</span><span class="tag">Code Review</span><span class="tag">Mentoring</span>
           </div>
@@ -633,7 +671,7 @@
     </section>
 
     <section id="projects">
-      <div class="sec-head"><h2>Projects</h2></div>
+      <div class="sec-head"><h2 data-i18n="nav_projects">Projects</h2></div>
       <div class="projects-grid">
         <div class="proj">
           <div class="p-head"><h3>Lorem Ipsum Toolkit</h3><span class="p-link"><a href="#">repo →</a></span></div>
@@ -649,7 +687,7 @@
     </section>
 
     <section id="certifications">
-      <div class="sec-head"><h2>Certifications</h2></div>
+      <div class="sec-head"><h2 data-i18n="nav_certifications">Certifications</h2></div>
       <ul class="cert-list">
         <li>
           <div><div class="cert-name">Lorem Ipsum Certified Professional</div><div class="cert-org">Consectetur Institute</div></div>
@@ -694,6 +732,114 @@
         root.setAttribute('data-style', val);
         setActiveButton(val);
         try { localStorage.setItem(KEY, val); } catch (e) {}
+      });
+    });
+  })();
+
+  // ---------- Language switching (UI chrome only; placeholder body copy is left untranslated) ----------
+  (function () {
+    var KEY = 'cv-lang';
+    var root = document.documentElement;
+
+    var dict = {
+      en: {
+        toc_label: 'SECTIONS',
+        nav_about: 'About',
+        nav_experience: 'Experience',
+        nav_education: 'Education',
+        nav_skills: 'Skills',
+        nav_projects: 'Projects',
+        nav_certifications: 'Certifications',
+        print_btn: 'Download / Print PDF',
+        present: 'Present',
+        skill_lang_fw: 'LANGUAGES & FRAMEWORKS',
+        skill_data_infra: 'DATA & INFRASTRUCTURE',
+        skill_tooling: 'TOOLING',
+        skill_practices: 'PRACTICES',
+        style_document: 'Document',
+        style_futurist: 'Futurist',
+        style_cyberpunk: 'Cyberpunk'
+      },
+      es: {
+        toc_label: 'SECCIONES',
+        nav_about: 'Acerca de',
+        nav_experience: 'Experiencia',
+        nav_education: 'Educación',
+        nav_skills: 'Habilidades',
+        nav_projects: 'Proyectos',
+        nav_certifications: 'Certificaciones',
+        print_btn: 'Descargar / Imprimir PDF',
+        present: 'Actualidad',
+        skill_lang_fw: 'LENGUAJES Y FRAMEWORKS',
+        skill_data_infra: 'DATOS E INFRAESTRUCTURA',
+        skill_tooling: 'HERRAMIENTAS',
+        skill_practices: 'PRÁCTICAS',
+        style_document: 'Documento',
+        style_futurist: 'Futurista',
+        style_cyberpunk: 'Cyberpunk'
+      },
+      pt: {
+        toc_label: 'SEÇÕES',
+        nav_about: 'Sobre',
+        nav_experience: 'Experiência',
+        nav_education: 'Formação',
+        nav_skills: 'Habilidades',
+        nav_projects: 'Projetos',
+        nav_certifications: 'Certificações',
+        print_btn: 'Baixar / Imprimir PDF',
+        present: 'Atual',
+        skill_lang_fw: 'LINGUAGENS E FRAMEWORKS',
+        skill_data_infra: 'DADOS E INFRAESTRUTURA',
+        skill_tooling: 'FERRAMENTAS',
+        skill_practices: 'PRÁTICAS',
+        style_document: 'Documento',
+        style_futurist: 'Futurista',
+        style_cyberpunk: 'Cyberpunk'
+      },
+      fr: {
+        toc_label: 'SECTIONS',
+        nav_about: 'À propos',
+        nav_experience: 'Expérience',
+        nav_education: 'Formation',
+        nav_skills: 'Compétences',
+        nav_projects: 'Projets',
+        nav_certifications: 'Certifications',
+        print_btn: 'Télécharger / Imprimer en PDF',
+        present: 'Présent',
+        skill_lang_fw: 'LANGAGES & FRAMEWORKS',
+        skill_data_infra: 'DONNÉES & INFRASTRUCTURE',
+        skill_tooling: 'OUTILS',
+        skill_practices: 'PRATIQUES',
+        style_document: 'Document',
+        style_futurist: 'Futuriste',
+        style_cyberpunk: 'Cyberpunk'
+      }
+    };
+
+    var langButtons = document.querySelectorAll('.lang-switch button');
+    var i18nEls = document.querySelectorAll('[data-i18n]');
+
+    function applyLanguage(lang) {
+      var strings = dict[lang] || dict.en;
+      i18nEls.forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (strings[key] !== undefined) el.textContent = strings[key];
+      });
+      root.setAttribute('lang', lang);
+      langButtons.forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+    }
+
+    var saved = 'en';
+    try { saved = localStorage.getItem(KEY) || 'en'; } catch (e) {}
+    applyLanguage(saved);
+
+    langButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.getAttribute('data-lang');
+        applyLanguage(lang);
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
       });
     });
   })();
